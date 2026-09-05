@@ -1,16 +1,17 @@
-"usev client"
-import AuthForm from '@/components/forms/AuthForm';
-import React from 'react'
+"use client";
 
-const signUp = () => {
-    return(
-<AuthForm 
- formType="SIGN_UP"
- schema={SignUpSchema}
- defaultValues={{email: "", password: "". name: "", username: ""}}
- onSubmit={(data) => Promise.resolve({ success: true, data})}
+import AuthForm from "@/components/forms/AuthForm";
+import { SignUpSchema } from "@/lib/validations";
 
-/>
-    )
-}
-export default signUp;
+const SignUp = () => {
+  return (
+    <AuthForm
+      formType="SIGN_UP"
+      schema={SignUpSchema}
+      defaultValues={{ username: "", name: "", email: "", password: "" }}
+      onSubmit={() => Promise.resolve({ success: true })}
+    />
+  );
+};
+
+export default SignUp;
