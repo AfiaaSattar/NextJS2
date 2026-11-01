@@ -11,14 +11,21 @@ interface SignInWithOAuthParams {
 
 interface AuthCredentials {
   name: string;
+  username: string;
   email: string;
   password: string;
-  username: string;
-  image?: string;
 }
 
-interface CreateQuestionParams{
-    title: string;
-    content: string;
-    tags: string[];
+interface CreateQuestionParams {
+  title: string;
+  content: string;
+  tags: string[];
+}
+
+interface EditQuestionParams extends CreateQuestionParams {
+  questionId: string;
+}
+
+interface GetQuestionParams {
+  questionId: string;
 }
