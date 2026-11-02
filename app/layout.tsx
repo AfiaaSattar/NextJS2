@@ -32,7 +32,7 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <SessionProvider session={session}>
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <ThemeProvider
          attribute="class"
          defaultTheme="system"
