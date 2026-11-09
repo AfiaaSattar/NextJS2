@@ -1,53 +1,43 @@
-import Link from "next/link";
-
-import QuestionCard from "@/components/cards/QuestionCard";
-import HomeFilter from "@/components/filters/HomeFilter";
-import LocalSearch from "@/components/search/LocalSearch";
-import { Button } from "@/components/ui/button";
-import ROUTES from "@/constants/routes";
-import { getQuestions } from "@/lib/actions/question.action";
+import TagCard from "@/components/cards/TagCard";
 import DataRenderer from "@/components/ui/DataRenderer";
-import { EMPTY_QUESTION } from "@/constants/states";
+import LocalSearch from "@/components/search/LocalSearch";
+import ROUTES from "@/constants/routes";
+import { EMPTY_TAGS } from "@/constants/states";
+import { getTags } from "@/lib/actions/tag.action";
 
-interface SearchParams {
-  searchParams: Promise<{ [key: string]: string }>;
-}
-
-const Home = async ({ searchParams }: SearchParams) => {
+const Tags = async ({ searchParams }: RouteParams) => {
   const { page, pageSize, query, filter } = await searchParams;
-
-  const { success, data, error } = await getQuestions({
+  const { success, data, error } = await getTags({
     page: Number(page) || 1,
     pageSize: Number(pageSize) || 10,
-    query: query || "",
-    filter: filter || "",
+    query,
+    filter,
   });
 
-  const { questions } = data || {};
+  const { tags } = data || {};
 
   return (
     <>
-      <section className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
-        <h1 className="h1-bold text-dark100_light900">All Questions</h1>
+      <h1 className="h1-bold text-dark100_light900 text-3xl">Tags</h1>
 
-        <Button className="primary-gradient text-light-900! min-h-11.5 px-4 py-3" asChild>
-          <Link href={ROUTES.ASK_QUESTION}>Ask a Question</Link>
-        </Button>
-      </section>
       <section className="mt-11">
-        <LocalSearch route="/" imgSrc="/icons/search.svg" placeholder="Search questions..." otherClasses="flex-1" />
+        <LocalSearch
+          route={ROUTES.TAGS}
+          imgSrc="/icons/search.svg"
+          placeholder="Search tags..."
+          otherClasses="flex-1"
+          iconPostions="left"
+        />
       </section>
-      <HomeFilter />
-
       <DataRenderer
         success={success}
         error={error}
-        data={questions}
-        empty={EMPTY_QUESTION}
-        render={(questions) => (
-          <div className="mt-10 flex w-full flex-col gap-6">
-            {questions.map((question) => (
-              <QuestionCard key={question._id} question={question} />
+        data={tags}
+        empty={EMPTY_TAGS}
+        render={(tags) => (
+          <div className="mt-10 flex w-full flex-wrap gap-4">
+            {tags.map((tag) => (
+              <TagCard key={tag._id} {...tag} />
             ))}
           </div>
         )}
@@ -56,4 +46,4 @@ const Home = async ({ searchParams }: SearchParams) => {
   );
 };
 
-export default Home;
+export default Tags;
