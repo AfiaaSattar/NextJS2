@@ -4,7 +4,7 @@ import ROUTES from "@/constants/routes";
 import { getTimeStamp } from "@/lib/utils";
 
 import { Preview } from "../editor/Preview";
-import UserAvatar from "../ui/UserAvatar";
+import UserAvatar from "../UserAvatar";
 
 const AnswerCard = ({ _id, author, content, createdAt }: Answer) => {
   return (

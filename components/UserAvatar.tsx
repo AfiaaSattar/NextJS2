@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 import ROUTES from "@/constants/routes";
 
-import { Avatar, AvatarFallback } from "../ui/avatar";
+import { Avatar, AvatarFallback } from "./ui/avatar";
 
 interface Props {
   id: string;
